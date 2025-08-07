@@ -556,6 +556,262 @@
             border-color: var(--accent-gold);
         }
 
+        /* Education Section */
+        .education {
+            background: var(--secondary-dark);
+        }
+
+        .education-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .education-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .education-period {
+            color: var(--accent-teal);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .education-major {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-gpa {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Career Timeline */
+        .career {
+            background: var(--primary-dark);
+        }
+
+        .timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-subtle);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            border: 3px solid var(--primary-dark);
+            z-index: 2;
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 3;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-role {
+            color: var(--accent-teal);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Certifications & Awards */
+        .certifications {
+            background: var(--secondary-dark);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-issuer {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Language Skills */
+        .languages {
+            background: var(--primary-dark);
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .language-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .language-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-teal);
+        }
+
+        .language-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .language-level {
+            color: var(--accent-teal);
+            font-size: 1rem;
+        }
+
         /* Footer */
         .footer {
             background: var(--secondary-dark);
@@ -600,6 +856,39 @@
                 gap: 3rem;
             }
 
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                margin-left: 40px;
+            }
+
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .timeline-date {
+                position: relative;
+                left: 0;
+                transform: none;
+                margin-bottom: 1rem;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin: 0;
+            }
+
             .projects-grid {
                 grid-template-columns: 1fr;
             }
@@ -623,6 +912,8 @@
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#career" class="nav-link">Career</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -637,12 +928,12 @@
                 <div class="hero-subtitle">Full-Stack Developer</div>
                 <h1 class="hero-title">I build elegant, scalable digital experiences</h1>
                 <p class="hero-description">
-                    10년 이상의 풀스택 개발 경험을 바탕으로 AI 서비스부터 금융 시스템까지, 
+                    15년 이상의 풀스택 개발 경험을 바탕으로 AI 서비스부터 금융 시스템까지, 
                     혁신적이고 안정적인 솔루션을 구축합니다.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-number">10+</span>
+                        <span class="stat-number">15+</span>
                         <span class="stat-label">Years Experience</span>
                     </div>
                     <div class="stat-item">
@@ -665,7 +956,7 @@
                 <div class="section-subtitle">About Me</div>
                 <h2 class="section-title">Creating Digital Solutions</h2>
                 <p class="section-description">
-                    복잡한 비즈니스 요구사항을 우아한 기술 솔루션으로 변환하는 것을 전문으로 합니다.
+                    고객의 사용자 경험을 만족시키고, 회사의 이익에 기여하는 풀스택 개발자입니다.
                 </p>
             </div>
             <div class="about-content">
@@ -674,13 +965,14 @@
                 </div>
                 <div class="about-text">
                     <p>
-                        금융권 대형 시스템부터 블록체인, AI 서비스까지 다양한 도메인에서 백엔드·프론트엔드·DB 전 영역을 아우르는 개발을 수행해왔습니다. 
+                        15년 이상의 풀스택 개발 경험을 바탕으로 고객 중심의 서비스 개발에 집중해왔습니다. 금융권 대형 시스템부터 블록체인, AI 서비스까지 다양한 도메인에서 백엔드·프론트엔드·DB 전 영역을 아우르는 개발을 수행했습니다.
                         복잡한 업무 로직의 통합과 표준화를 통해 시스템 성능과 안정성을 높이는 것을 강점으로 하며, 설계 단계부터 개발, 운영까지 프로젝트의 전 라이프사이클에 기여했습니다.
                     </p>
                     <br>
                     <p>
                         협업을 통한 문제 해결과 팀의 성장을 중요하게 여기며, 새로운 기술과 도구의 학습에 적극적이고 빠른 적응력을 발휘합니다. 
                         장애 상황이나 미비한 요건에 직면했을 때 업무적 통찰을 바탕으로 개선 방향을 제시하고 구현해내는 것을 강점으로 삼고 있습니다.
+                        실질적인 비즈니스 가치를 창출하는 개발자로서 함께 성장할 수 있는 조직에 기여하고자 합니다.
                     </p>
                 </div>
             </div>
@@ -700,6 +992,165 @@
                 <div class="highlight-item">
                     <div class="highlight-number">Leader</div>
                     <div class="highlight-label">Development Team</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Academic Background</div>
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="education-content">
+                <div class="education-card">
+                    <div class="education-period">2000.02 - 2004.02</div>
+                    <h3 class="education-title">세종대학교</h3>
+                    <p class="education-major">일어일문학과 졸업</p>
+                    <p class="education-gpa">학점: 3.1 / 4.5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Timeline Section -->
+    <section id="career" class="section career">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Professional Journey</div>
+                <h2 class="section-title">Career Experience</h2>
+                <p class="section-description">
+                    총 15년 3개월의 경력으로 다양한 도메인에서 혁신적인 솔루션을 구축해왔습니다.
+                </p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024.09 - 현재</div>
+                    <div class="timeline-content">
+                        <h3>하이브파이브</h3>
+                        <p class="timeline-role">개발 부장 / 팀장</p>
+                        <p class="timeline-description">
+                            바통마켓 웹앱 개발 및 시스템 구축. 베트남 개발사의 실패 프로젝트를 완전 재개발하여 성공적인 이커머스 플랫폼으로 전환.
+                            재오픈 후 2000명 회원 유치 달성. SPC그룹 자회사 섹타나인과의 협업 프로젝트 주도.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">Sanity.io</span>
+                            <span class="tech-tag">AWS Amplify</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022.09 - 2024.09</div>
+                    <div class="timeline-content">
+                        <h3>주스</h3>
+                        <p class="timeline-role">서비스개발팀 부장 / 팀장</p>
+                        <p class="timeline-description">
+                            AI 음악 창작 플랫폼 "리라(Re:La)" 개발 및 운영. 0부터 상용 서비스까지 전체 시스템 구축.
+                            KT 신사옥 AI BGM 서비스 개발 및 컴퓨터프로그램저작물 등록 (C-2023-058999).
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021.08 - 2022.09</div>
+                    <div class="timeline-content">
+                        <h3>주식회사비브릭</h3>
+                        <p class="timeline-role">에셋발행본부 부장 / 팀장</p>
+                        <p class="timeline-description">
+                            블록체인 기반 자산 발행 및 거래 시스템 개발. NFT 마켓플레이스 구축 및 스마트 컨트랙트 개발.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Blockchain</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Solidity</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021.04 - 2021.08</div>
+                    <div class="timeline-content">
+                        <h3>주식회사피어테크</h3>
+                        <p class="timeline-role">개발본부 부장 / 팀장</p>
+                        <p class="timeline-description">
+                            거래소 유동성 공급봇(MM) 장애 해결 및 거래 환경 정상화. 코스모스허브4 업그레이드 대응 및 스테이킹 서비스 재개.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Cosmos SDK</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020.12 - 2021.04</div>
+                    <div class="timeline-content">
+                        <h3>지티이노비젼</h3>
+                        <p class="timeline-role">부장</p>
+                        <p class="timeline-description">
+                            우리은행 자산관리 고도화 프로젝트. 비대면 전문가 상담 서비스 프론트엔드 개발.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Struts</span>
+                            <span class="tech-tag">Sybase</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2018.04 - 2020.10</div>
+                    <div class="timeline-content">
+                        <h3>핀솔정보</h3>
+                        <p class="timeline-role">과장</p>
+                        <p class="timeline-description">
+                            대한행정공제회 차세대 시스템 개발. 이자율 계산 프로시저 50개→1개 통합으로 유지보수 효율성 80% 향상.
+                            KB손해보험 영업지원 고도화, 신한생명 오렌지라이프 통합 프로젝트 수행.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring</span>
+                            <span class="tech-tag">Oracle</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2012.09 - 2017.10</div>
+                    <div class="timeline-content">
+                        <h3>포스켄</h3>
+                        <p class="timeline-role">장기파트 과장</p>
+                        <p class="timeline-description">
+                            LIG손해보험 모바일 청약·전자서명 시스템 개발. KB손해보험 기간계 장기청약 시스템 개발 및 4년간 운영.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Proframe</span>
+                            <span class="tech-tag">Oracle</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2009.11 - 2012.09</div>
+                    <div class="timeline-content">
+                        <h3>텐비트</h3>
+                        <p class="timeline-role">개발 대리</p>
+                        <p class="timeline-description">
+                            교보문고 도서구매 시스템 개발. 영풍문고 인터넷서점 시스템 개발 및 유지보수.
+                            SK브로드밴드 SKB-NITS 시스템 유지보수.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">JSP</span>
+                            <span class="tech-tag">Oracle</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -837,6 +1288,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-icon">⚡</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <div class="project-period">2021.06 - 2021.08</div>
+                            <div class="project-badge">Blockchain</div>
+                        </div>
+                        <h3 class="project-title">거래소 MM봇 장애 해결 & 코스모스 업그레이드</h3>
+                        <p class="project-description">
+                            거래소 유동성 공급봇 장애 해결 및 코스모스허브4 업그레이드 대응
+                        </p>
+                        <div class="project-achievements">
+                            <ul>
+                                <li>MM봇 매수·매도 불균형 문제 해결로 거래 환경 정상화</li>
+                                <li>코스모스허브4 업그레이드 대응 모듈 개발</li>
+                                <li>지연 리워드 계좌의 미수 금액 100% 회수</li>
+                                <li>스테이킹 서비스 재개 및 고객 불편 해소</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Cosmos SDK</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">gRPC</span>
+                            <span class="tech-tag">Kafka</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -900,6 +1381,59 @@
         </div>
     </section>
 
+    <!-- Certifications & Awards Section -->
+    <section id="certifications" class="section certifications">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Achievements</div>
+                <h2 class="section-title">Certifications & Awards</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">🏆</div>
+                    <h3 class="cert-title">AI Challenge 이노베이션 수상</h3>
+                    <p class="cert-issuer">한국 표준협회</p>
+                    <p class="cert-date">2020.12</p>
+                    <p class="cert-description">공무원 식대 사용 정보 빅데이터 활용 프로젝트</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">📜</div>
+                    <h3 class="cert-title">컴퓨터프로그램저작물</h3>
+                    <p class="cert-issuer">한국저작권위원회</p>
+                    <p class="cert-date">C-2023-058999</p>
+                    <p class="cert-description">KT AI 배경음악 재생 시스템</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">☕</div>
+                    <h3 class="cert-title">SCJP</h3>
+                    <p class="cert-issuer">Sun Microsystems</p>
+                    <p class="cert-date">2009.04</p>
+                    <p class="cert-description">Sun Certified Java Programmer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Language Skills Section -->
+    <section id="languages" class="section languages">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Communication</div>
+                <h2 class="section-title">Language Skills</h2>
+            </div>
+            <div class="language-grid">
+                <div class="language-card">
+                    <h3 class="language-name">영어</h3>
+                    <p class="language-level">일상회화 가능</p>
+                </div>
+                <div class="language-card">
+                    <h3 class="language-name">일본어</h3>
+                    <p class="language-level">일상회화 가능</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Portfolio Links -->
     <section class="section">
         <div class="container">
@@ -911,6 +1445,11 @@
                 </p>
             </div>
             <div class="portfolio-grid">
+                <a href="https://www.batong.app/" target="_blank" class="portfolio-item">
+                    <h4>바통마켓</h4>
+                    <p>이커머스 플랫폼 - 현재 운영중</p>
+                    <span class="portfolio-url">batong.app</span>
+                </a>
                 <a href="https://rela-stg.juice.co.kr/ko/landing" target="_blank" class="portfolio-item">
                     <h4>AI 음악 플랫폼 리라</h4>
                     <p>AI 기반 음악 창작 및 거래 플랫폼</p>
@@ -921,15 +1460,10 @@
                     <p>AI를 활용한 오디오북 자동 생성 서비스</p>
                     <span class="portfolio-url">ai-audio-book-make-app.vercel.app</span>
                 </a>
-                <a href="https://www.batong.app/" target="_blank" class="portfolio-item">
-                    <h4>Batong 서비스</h4>
-                    <p>웹 애플리케이션 서비스</p>
-                    <span class="portfolio-url">batong.app</span>
-                </a>
-                <a href="https://ownabee-web.vercel.app/" target="_blank" class="portfolio-item">
-                    <h4>Ownabee 웹 서비스</h4>
-                    <p>웹 플랫폼 개발 프로젝트</p>
-                    <span class="portfolio-url">ownabee-web.vercel.app</span>
+                <a href="https://v0-abraham-s-life-story.vercel.app/" target="_blank" class="portfolio-item">
+                    <h4>Abraham's Life Story</h4>
+                    <p>인터랙티브 스토리텔링 웹 애플리케이션</p>
+                    <span class="portfolio-url">v0-abraham-s-life-story.vercel.app</span>
                 </a>
                 <a href="https://salt-cosmetics.vercel.app/" target="_blank" class="portfolio-item">
                     <h4>Salt Cosmetics</h4>
@@ -940,6 +1474,11 @@
                     <h4>Nutty Craft</h4>
                     <p>크래프트 관련 웹 애플리케이션</p>
                     <span class="portfolio-url">nutty-craft.vercel.app</span>
+                </a>
+                <a href="https://ownabee-web.vercel.app/" target="_blank" class="portfolio-item">
+                    <h4>Ownabee 웹 서비스</h4>
+                    <p>웹 플랫폼 개발 프로젝트</p>
+                    <span class="portfolio-url">ownabee-web.vercel.app</span>
                 </a>
             </div>
         </div>
