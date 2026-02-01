@@ -3,317 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>조슈아 솔루션 - 웹/앱 개발 & AI 솔루션</title>
-    <meta name="description" content="17년 경력의 전문 개발팀이 만드는 맞춤형 웹/앱 개발, AI 솔루션. 아이디어를 현실로 만들어 드립니다.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>조슈아 솔루션 - 검증된 개발팀과 함께하세요</title>
+    <meta name="description" content="17년 경력의 전문 개발팀. 웹/앱 개발, AI 솔루션을 빠르고 안정적으로 구축합니다.">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
         :root {
-            --navy: #0a192f;
-            --light-navy: #112240;
-            --lightest-navy: #233554;
-            --slate: #8892b0;
-            --light-slate: #a8b2d1;
-            --lightest-slate: #ccd6f6;
-            --white: #e6f1ff;
-            --green: #64ffda;
-            --green-tint: rgba(100, 255, 218, 0.1);
-            --font-mono: 'SF Mono', 'Fira Code', monospace;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --white: #FFFFFF;
+            --gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: var(--font-sans);
-            background: var(--navy);
-            color: var(--slate);
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-700);
             line-height: 1.6;
-            font-size: 18px;
+            font-size: 16px;
         }
 
-        h1, h2, h3 { color: var(--lightest-slate); font-weight: 700; }
-        a { color: var(--green); text-decoration: none; transition: var(--transition); }
+        h1, h2, h3 { color: var(--gray-900); font-weight: 700; }
+        a { color: var(--primary); text-decoration: none; transition: all 0.2s; }
 
         /* Navigation */
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 70px;
-            background: rgba(10, 25, 47, 0.9);
+            height: 72px;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding: 0 50px;
+            border-bottom: 1px solid var(--gray-100);
         }
         .nav-container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .logo {
-            color: var(--green);
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
-            font-family: var(--font-mono);
+            color: var(--gray-900);
         }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--lightest-slate); font-size: 14px; }
-        .nav-links a:hover { color: var(--green); }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--gray-600); font-size: 15px; font-weight: 500; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .nav-cta:hover { background: var(--primary-dark); }
 
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 50px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 160px 24px 100px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
         }
-        .hero-content { max-width: 800px; }
-        .hero-tag {
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 16px;
-            margin-bottom: 20px;
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
         }
         .hero h1 {
-            font-size: clamp(40px, 8vw, 70px);
-            margin-bottom: 10px;
-            color: var(--lightest-slate);
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: 1.2;
+            margin-bottom: 20px;
         }
-        .hero h2 {
-            font-size: clamp(30px, 5vw, 50px);
-            color: var(--slate);
-            margin-bottom: 30px;
+        .hero h1 .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .hero p {
-            font-size: 20px;
-            max-width: 540px;
-            margin-bottom: 40px;
+            font-size: 18px;
+            color: var(--gray-500);
+            max-width: 600px;
+            margin: 0 auto 40px;
         }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
         .btn {
-            display: inline-block;
-            padding: 18px 40px;
-            border: 1px solid var(--green);
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 14px;
-            border-radius: 4px;
-            transition: var(--transition);
-            margin-right: 15px;
-            margin-bottom: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
-        .btn:hover { background: var(--green-tint); }
-        .btn-primary { background: var(--green); color: var(--navy); }
-        .btn-primary:hover { background: #4de8c7; }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary {
+            background: var(--white);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* Sections */
+        /* Stats */
+        .stats {
+            padding: 60px 24px;
+            background: var(--white);
+        }
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .stat-item p { color: var(--gray-500); font-size: 15px; }
+
+        /* Section */
         section {
-            padding: 100px 50px;
+            padding: 100px 24px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 32px;
-            margin-bottom: 50px;
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--lightest-navy);
-            max-width: 300px;
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
         }
-        .section-title span {
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 20px;
-            font-weight: 400;
+        .section-header p {
+            color: var(--gray-500);
+            font-size: 18px;
         }
 
         /* Services */
+        .services { background: var(--gray-50); max-width: 100%; }
+        .services-inner { max-width: 1200px; margin: 0 auto; }
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 24px;
         }
         .service-card {
-            background: var(--light-navy);
-            padding: 35px;
-            border-radius: 8px;
-            transition: var(--transition);
-            border-top: 3px solid var(--green);
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s;
         }
-        .service-card:hover { transform: translateY(-5px); }
-        .service-card h3 { font-size: 20px; margin-bottom: 15px; }
-        .service-card p { font-size: 15px; line-height: 1.7; }
-        .service-tags {
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 12px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-size: 24px;
         }
+        .service-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .service-card p { color: var(--gray-500); font-size: 15px; line-height: 1.7; }
+        .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
         .service-tags span {
-            background: var(--green-tint);
-            color: var(--green);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-family: var(--font-mono);
-        }
-
-        /* About */
-        .about-content {
-            display: grid;
-            grid-template-columns: 3fr 2fr;
-            gap: 50px;
-            align-items: start;
-        }
-        .about-text p { margin-bottom: 15px; font-size: 17px; }
-        .skills-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .skills-list li {
-            list-style: none;
-            font-family: var(--font-mono);
+            background: var(--gray-100);
+            color: var(--gray-600);
+            padding: 4px 12px;
+            border-radius: 6px;
             font-size: 13px;
-            color: var(--light-slate);
-        }
-        .skills-list li::before {
-            content: '▹';
-            color: var(--green);
-            margin-right: 10px;
-        }
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .stat-item {
-            background: var(--light-navy);
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--green);
-            font-family: var(--font-mono);
-        }
-        .stat-label { font-size: 14px; margin-top: 5px; }
-
-        /* Experience */
-        .experience-item {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 40px;
-            border-left: 2px solid var(--lightest-navy);
-        }
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            background: var(--green);
-            border-radius: 50%;
-        }
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .experience-title { font-size: 20px; color: var(--lightest-slate); }
-        .experience-company { color: var(--green); }
-        .experience-date {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--slate);
-        }
-        .experience-item ul { margin-top: 10px; padding-left: 20px; }
-        .experience-item li {
-            font-size: 15px;
-            margin-bottom: 8px;
-            color: var(--light-slate);
+            font-weight: 500;
         }
 
         /* Portfolio */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
         }
         .portfolio-card {
-            background: var(--light-navy);
-            border-radius: 8px;
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--gray-100);
             overflow: hidden;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
-        .portfolio-card:hover { transform: translateY(-5px); }
-        .portfolio-content { padding: 25px; }
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .portfolio-content { padding: 28px; }
         .portfolio-type {
-            color: var(--green);
-            font-family: var(--font-mono);
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 6px;
             font-size: 12px;
-            margin-bottom: 8px;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
         .portfolio-card h3 { font-size: 20px; margin-bottom: 12px; }
-        .portfolio-card p { font-size: 14px; margin-bottom: 15px; line-height: 1.6; }
-        .portfolio-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+        .portfolio-card p { color: var(--gray-500); font-size: 14px; line-height: 1.7; }
+        .portfolio-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
         .portfolio-tech span {
-            color: var(--light-slate);
-            font-size: 12px;
-            font-family: var(--font-mono);
+            color: var(--gray-400);
+            font-size: 13px;
         }
+
+        /* Process */
+        .process { background: var(--gray-50); max-width: 100%; }
+        .process-inner { max-width: 1200px; margin: 0 auto; }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .process-step {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--gray-100);
+        }
+        .process-number {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .process-step h3 { font-size: 18px; margin-bottom: 8px; }
+        .process-step p { color: var(--gray-500); font-size: 14px; }
+
+        /* Why Us */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .why-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--gray-100);
+            display: flex;
+            gap: 20px;
+        }
+        .why-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 24px;
+        }
+        .why-card h3 { font-size: 18px; margin-bottom: 8px; }
+        .why-card p { color: var(--gray-500); font-size: 14px; }
 
         /* CTA */
         .cta {
             text-align: center;
-            padding: 100px 50px;
+            padding: 100px 24px;
+            background: var(--gradient);
+            max-width: 100%;
         }
-        .cta h2 { font-size: 42px; margin-bottom: 20px; }
-        .cta p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .cta h2 { color: var(--white); font-size: 36px; margin-bottom: 16px; }
+        .cta p { color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 32px; }
+        .cta .btn-primary {
+            background: var(--white);
+            color: var(--primary);
         }
+        .cta .btn-primary:hover { background: var(--gray-100); }
 
         /* Footer */
         footer {
+            padding: 48px 24px;
             text-align: center;
-            padding: 50px;
-            border-top: 1px solid var(--lightest-navy);
+            background: var(--gray-900);
+            color: var(--gray-400);
         }
-        .footer-contact { margin-bottom: 20px; }
-        .footer-contact a { color: var(--light-slate); margin: 0 15px; }
-        .footer-contact a:hover { color: var(--green); }
+        .footer-contact { margin-bottom: 16px; }
+        .footer-contact a { color: var(--gray-300); margin: 0 16px; }
+        .footer-contact a:hover { color: var(--white); }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav { padding: 0 25px; }
             .nav-links { display: none; }
-            .hero, section { padding: 80px 25px; }
-            .about-content { grid-template-columns: 1fr; }
-            .about-stats { grid-template-columns: repeat(2, 1fr); }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -321,241 +350,238 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="logo">JOSHUA SOLUTION</div>
+            <div class="logo">JOSHUA <span>SOLUTION</span></div>
             <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#contact">Contact</a>
+                <a href="#services">서비스</a>
+                <a href="#portfolio">포트폴리오</a>
+                <a href="#process">진행 절차</a>
+                <a href="#contact" class="nav-cta">문의하기</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-content">
-            <p class="hero-tag">// Professional Development Team</p>
-            <h1>JOSHUA SOLUTION</h1>
-            <h2>웹/앱 개발 & AI 솔루션</h2>
-            <p>
-                17년 경력의 전문 개발팀이 기획부터 개발, 배포까지 원스톱으로 진행합니다.
-                복잡한 비즈니스 로직도 안정적이고 확장 가능한 시스템으로 구현합니다.
-            </p>
-            <a href="#contact" class="btn btn-primary">프로젝트 문의</a>
-            <a href="#portfolio" class="btn">포트폴리오 보기</a>
+        <div class="hero-badge">Professional Development Team</div>
+        <h1>검증된 개발팀과 함께<br><span class="highlight">프로젝트를 성공시키세요</span></h1>
+        <p>17년 경력의 전문 개발팀이 기획부터 개발, 배포까지 원스톱으로 진행합니다. 복잡한 비즈니스 로직도 안정적인 시스템으로 구현합니다.</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">프로젝트 문의하기</a>
+            <a href="#portfolio" class="btn btn-secondary">포트폴리오 보기</a>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>17+</h3>
+                <p>년 개발 경력</p>
+            </div>
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>완료 프로젝트</p>
+            </div>
+            <div class="stat-item">
+                <h3>5,000+</h3>
+                <p>서비스 사용자</p>
+            </div>
+            <div class="stat-item">
+                <h3>94%</h3>
+                <p>고객 재계약률</p>
+            </div>
         </div>
     </section>
 
     <!-- Services -->
-    <section id="services">
-        <h2 class="section-title"><span>01.</span> Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Web Development</h3>
-                <p>반응형 웹사이트, 관리자 대시보드, 이커머스 플랫폼 등 비즈니스에 최적화된 웹 솔루션을 구축합니다.</p>
-                <div class="service-tags">
-                    <span>Next.js</span><span>React</span><span>Django</span><span>Node.js</span>
+    <section class="services" id="services">
+        <div class="services-inner">
+            <div class="section-header">
+                <h2>원하는 서비스를 선택하세요</h2>
+                <p>다양한 분야의 개발 서비스를 제공합니다</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">W</div>
+                    <h3>Web Development</h3>
+                    <p>반응형 웹사이트, 관리자 대시보드, 이커머스 플랫폼 등 비즈니스에 최적화된 웹 솔루션을 구축합니다.</p>
+                    <div class="service-tags">
+                        <span>Next.js</span><span>React</span><span>Django</span><span>Node.js</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">A</div>
+                    <h3>App Development</h3>
+                    <p>iOS/Android 크로스플랫폼 앱을 빠르고 효율적으로 개발합니다. MVP부터 상용 서비스까지.</p>
+                    <div class="service-tags">
+                        <span>React Native</span><span>Flutter</span><span>Expo</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">AI</div>
+                    <h3>AI Solution</h3>
+                    <p>ChatGPT, Claude 등 LLM 연동, AI 기반 자동화, 맞춤형 AI 서비스를 구축합니다.</p>
+                    <div class="service-tags">
+                        <span>OpenAI</span><span>LangChain</span><span>RAG</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">S</div>
+                    <h3>System Architecture</h3>
+                    <p>대규모 트래픽 처리, 마이크로서비스 아키텍처, 클라우드 인프라 설계 및 구축.</p>
+                    <div class="service-tags">
+                        <span>AWS</span><span>Docker</span><span>Kubernetes</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <h3>App Development</h3>
-                <p>iOS/Android 크로스플랫폼 앱을 빠르고 효율적으로 개발합니다. MVP부터 상용 서비스까지 지원합니다.</p>
-                <div class="service-tags">
-                    <span>React Native</span><span>Flutter</span><span>Expo</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <h3>AI Solution</h3>
-                <p>ChatGPT, Claude 등 LLM 연동, AI 기반 자동화, 맞춤형 AI 서비스를 구축합니다.</p>
-                <div class="service-tags">
-                    <span>OpenAI</span><span>LangChain</span><span>RAG</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <h3>System Architecture</h3>
-                <p>대규모 트래픽 처리, 마이크로서비스 아키텍처, 클라우드 인프라 설계 및 구축을 담당합니다.</p>
-                <div class="service-tags">
-                    <span>AWS</span><span>Docker</span><span>Kubernetes</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-        <h2 class="section-title"><span>02.</span> About Us</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>
-                    <strong style="color: var(--lightest-slate);">조슈아 솔루션</strong>은 
-                    사용자 경험과 비즈니스 가치를 동시에 만족시키는 개발 전문 팀입니다.
-                </p>
-                <p>
-                    금융권 대형 시스템부터 블록체인, AI 서비스까지 다양한 도메인에서 
-                    백엔드, 프론트엔드, 데이터베이스 전 영역을 아우르는 개발을 수행해왔습니다.
-                </p>
-                <p>
-                    최근에는 실패한 외주 프로젝트를 완전히 재설계하여 성공적인 플랫폼으로 전환시키고,
-                    AI 기반 서비스를 0부터 상용화까지 구축하는 등 도전적인 프로젝트를 성공적으로 수행하고 있습니다.
-                </p>
-                <ul class="skills-list">
-                    <li>Python / Django</li>
-                    <li>JavaScript / TypeScript</li>
-                    <li>React / Next.js</li>
-                    <li>Node.js / NestJS</li>
-                    <li>PostgreSQL / MySQL</li>
-                    <li>AWS / Docker</li>
-                    <li>React Native / Flutter</li>
-                    <li>AI / LLM Integration</li>
-                </ul>
-            </div>
-            <div class="about-stats">
-                <div class="stat-item">
-                    <div class="stat-number">17+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Projects Delivered</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">MVP Launched</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5000+</div>
-                    <div class="stat-label">Users Served</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-        <h2 class="section-title"><span>03.</span> Project Experience</h2>
-        
-        <div class="experience-item">
-            <div class="experience-header">
-                <div class="experience-title">E-Commerce Platform <span class="experience-company">@ 하이브파이브</span></div>
-                <div class="experience-date">2024.09 - Present</div>
-            </div>
-            <ul>
-                <li>베트남 개발사의 실패 프로젝트를 완전 재개발, 성공적인 플랫폼으로 전환</li>
-                <li>Next.js, Django 기반 시스템 재설계 및 Sanity.io 헤드리스 CMS 도입</li>
-                <li>재오픈 후 2,000명 회원 유치 달성</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <div class="experience-title">AI Music Platform <span class="experience-company">@ 주스</span></div>
-                <div class="experience-date">2022.09 - 2024.09</div>
-            </div>
-            <ul>
-                <li>AI 음악 창작 플랫폼 0부터 상용 서비스까지 전체 시스템 구축</li>
-                <li>토큰 기반 마켓플레이스 및 과금 체계 설계</li>
-                <li>KT 신사옥 AI BGM 서비스 개발, 프로그램 저작권 등록 및 특허 출원</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <div class="experience-title">Blockchain Platform <span class="experience-company">@ 비브릭</span></div>
-                <div class="experience-date">2021.08 - 2022.09</div>
-            </div>
-            <ul>
-                <li>블록체인 기반 자산 발행 및 거래 시스템 개발</li>
-                <li>NFT 마켓플레이스 구축 및 스마트 컨트랙트 개발</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <div class="experience-title">Enterprise System <span class="experience-company">@ 금융권 SI</span></div>
-                <div class="experience-date">2018.04 - 2020.10</div>
-            </div>
-            <ul>
-                <li>대한행정공제회 차세대 시스템, 이자율 계산 프로시저 50개를 1개로 통합</li>
-                <li>유지보수 효율성 80% 향상</li>
-                <li>KB손해보험, 신한생명 오렌지라이프 통합 프로젝트</li>
-            </ul>
         </div>
     </section>
 
     <!-- Portfolio -->
     <section id="portfolio">
-        <h2 class="section-title"><span>04.</span> Portfolio</h2>
+        <div class="section-header">
+            <h2>성공적으로 완료한 프로젝트</h2>
+            <p>다양한 분야에서 검증된 개발 역량을 확인하세요</p>
+        </div>
         <div class="portfolio-grid">
             <div class="portfolio-card">
                 <div class="portfolio-content">
-                    <p class="portfolio-type">E-Commerce</p>
+                    <span class="portfolio-type">E-Commerce</span>
                     <h3>바통마켓</h3>
-                    <p>실패한 외주 프로젝트를 완전 재개발하여 성공적인 이커머스 플랫폼으로 전환. 재오픈 후 2,000명 회원 유치.</p>
+                    <p>실패한 외주 프로젝트를 완전 재개발하여 성공적인 이커머스 플랫폼으로 전환. 재오픈 후 2,000명 회원 유치 달성.</p>
                     <div class="portfolio-tech">
-                        <span>Next.js</span><span>Django</span><span>Sanity.io</span><span>AWS</span>
+                        <span>Next.js</span><span>·</span><span>Django</span><span>·</span><span>AWS</span>
                     </div>
                 </div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-content">
-                    <p class="portfolio-type">AI Platform</p>
+                    <span class="portfolio-type">AI Platform</span>
                     <h3>리라 (Re:La)</h3>
-                    <p>AI 음악 창작 플랫폼. 토큰 기반 마켓플레이스, KT 신사옥 AI BGM 서비스 연동.</p>
+                    <p>AI 음악 창작 플랫폼. 토큰 기반 마켓플레이스 설계, KT 신사옥 AI BGM 서비스 개발 및 특허 출원.</p>
                     <div class="portfolio-tech">
-                        <span>Python</span><span>Django</span><span>Next.js</span><span>AI/ML</span>
+                        <span>Python</span><span>·</span><span>Django</span><span>·</span><span>AI/ML</span>
                     </div>
                 </div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-content">
-                    <p class="portfolio-type">Mobility</p>
+                    <span class="portfolio-type">Mobility</span>
                     <h3>KD-DSP</h3>
                     <p>국내 최대 운송그룹 디지털 전환 프로젝트. 5,000대 이상 차량 실시간 관제 플랫폼.</p>
                     <div class="portfolio-tech">
-                        <span>React</span><span>NestJS</span><span>React Native</span>
+                        <span>React</span><span>·</span><span>NestJS</span><span>·</span><span>React Native</span>
                     </div>
                 </div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-content">
-                    <p class="portfolio-type">AI Marketing</p>
+                    <span class="portfolio-type">AI Marketing</span>
                     <h3>Artnex</h3>
                     <p>AI 기반 퍼스널 컬러 및 브랜드 진단 마케팅 플랫폼. 22가지 스타일 분석 시스템.</p>
                     <div class="portfolio-tech">
-                        <span>Next.js</span><span>FastAPI</span><span>OpenAI</span>
+                        <span>Next.js</span><span>·</span><span>FastAPI</span><span>·</span><span>OpenAI</span>
                     </div>
                 </div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-content">
-                    <p class="portfolio-type">EdTech</p>
+                    <span class="portfolio-type">EdTech</span>
                     <h3>Ownabee</h3>
                     <p>AI 기반 맞춤형 동화책 생성 플랫폼. 어린이집 및 유치원 B2B 모델.</p>
                     <div class="portfolio-tech">
-                        <span>React Native</span><span>Supabase</span><span>OpenAI</span>
+                        <span>React Native</span><span>·</span><span>Supabase</span><span>·</span><span>OpenAI</span>
                     </div>
                 </div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-content">
-                    <p class="portfolio-type">MVP Series</p>
+                    <span class="portfolio-type">MVP Series</span>
                     <h3>Tinkercrew</h3>
                     <p>주 1회 앱 출시 프로젝트. 알림톡, 발렛주차, 감정일기, 의료광고AI 등 10개 이상 MVP 런칭.</p>
                     <div class="portfolio-tech">
-                        <span>Next.js</span><span>Supabase</span><span>Vercel</span>
+                        <span>Next.js</span><span>·</span><span>Supabase</span><span>·</span><span>Vercel</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="process">
+        <div class="process-inner">
+            <div class="section-header">
+                <h2>프로젝트 진행 절차</h2>
+                <p>체계적인 프로세스로 프로젝트를 성공시킵니다</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h3>상담 및 기획</h3>
+                    <p>요구사항 분석, 기술 검토, 일정 및 견적 산출</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h3>설계 및 디자인</h3>
+                    <p>시스템 아키텍처 설계, UI/UX 디자인, 프로토타입</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h3>개발 및 테스트</h3>
+                    <p>애자일 개발, 주간 진행 공유, 품질 테스트</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h3>배포 및 유지보수</h3>
+                    <p>서비스 배포, 모니터링, 지속적 유지보수</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section>
+        <div class="section-header">
+            <h2>왜 조슈아 솔루션인가요?</h2>
+            <p>다른 개발사와의 차별점을 확인하세요</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <div>
+                    <h3>빠른 개발 속도</h3>
+                    <p>17년 경험의 노하우로 일반 개발사 대비 2~3배 빠른 개발. MVP는 2주 내 출시 가능.</p>
+                </div>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">💬</div>
+                <div>
+                    <h3>원활한 소통</h3>
+                    <p>개발자와 직접 소통. 기획 의도를 정확히 이해하고 기술적 제안까지 드립니다.</p>
+                </div>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎯</div>
+                <div>
+                    <h3>풀스택 역량</h3>
+                    <p>프론트엔드, 백엔드, DB, 인프라 전 영역 커버. 일관된 품질을 보장합니다.</p>
+                </div>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🔒</div>
+                <div>
+                    <h3>안정적인 품질</h3>
+                    <p>금융권 대형 시스템 경험. 보안, 성능, 확장성을 고려한 설계.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section id="contact" class="cta">
-        <h2>프로젝트를 함께 하고 싶으신가요?</h2>
-        <p>아이디어 단계부터 구체적인 요구사항까지, 편하게 연락주세요.<br>무료 상담을 통해 최적의 솔루션을 제안해 드립니다.</p>
-        <a href="mailto:holyfavor@gmail.com" class="btn btn-primary">이메일 문의</a>
-        <a href="tel:010-2280-1866" class="btn">전화 문의</a>
+    <section class="cta" id="contact">
+        <h2>프로젝트를 시작할 준비가 되셨나요?</h2>
+        <p>아이디어 단계부터 구체적인 요구사항까지, 무료 상담을 통해 최적의 솔루션을 제안해 드립니다.</p>
+        <a href="mailto:holyfavor@gmail.com" class="btn btn-primary">무료 상담 신청하기</a>
     </section>
 
     <!-- Footer -->
@@ -565,9 +591,7 @@
             <a href="tel:010-2280-1866">010-2280-1866</a>
             <a href="https://github.com/crom592" target="_blank">GitHub</a>
         </div>
-        <p style="color: var(--slate); font-size: 14px;">
-            © 2026 Joshua Solution. All rights reserved.
-        </p>
+        <p>© 2026 Joshua Solution. All rights reserved.</p>
     </footer>
 
     <script>
