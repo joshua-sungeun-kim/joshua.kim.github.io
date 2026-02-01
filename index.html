@@ -221,6 +221,25 @@
             color: var(--white);
         }
 
+        
+        /* Portfolio Image */
+        .portfolio-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: var(--gray-100);
+        }
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.3s;
+        }
+        .portfolio-card:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+
         /* Portfolio */
         .portfolio-grid {
             display: grid;
@@ -465,6 +484,9 @@
             </div>
 
             <div class="portfolio-card" data-category="ai">
+                <div class="portfolio-image">
+                    <img src="ai-audiobook.png" alt="AI 오디오북 제작" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">AI Audio</span>
                     <h3>AI 오디오북 제작</h3>
@@ -476,6 +498,9 @@
             </div>
 
             <div class="portfolio-card" data-category="ai">
+                <div class="portfolio-image">
+                    <img src="lmtc-bazaar.png" alt="LMTC 바자회 시스템" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">AI Retail</span>
                     <h3>LMTC 바자회 시스템</h3>
@@ -499,6 +524,9 @@
             </div>
 
             <div class="portfolio-card" data-category="ecommerce">
+                <div class="portfolio-image">
+                    <img src="dungji-market.png" alt="둥지마켓" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Group Buying</span>
                     <h3>둥지마켓</h3>
@@ -511,6 +539,9 @@
 
             <!-- Mobility -->
             <div class="portfolio-card" data-category="mobility">
+                <div class="portfolio-image">
+                    <img src="kd-dsp.png" alt="KD-DSP" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Mobility</span>
                     <h3>KD-DSP</h3>
@@ -522,6 +553,9 @@
             </div>
 
             <div class="portfolio-card" data-category="mobility">
+                <div class="portfolio-image">
+                    <img src="drive-pass.png" alt="발렛주차 서비스" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Parking</span>
                     <h3>발렛주차 서비스</h3>
@@ -534,6 +568,9 @@
 
             <!-- EdTech -->
             <div class="portfolio-card" data-category="edtech">
+                <div class="portfolio-image">
+                    <img src="ownabee.png" alt="Ownabee" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">EdTech</span>
                     <h3>Ownabee</h3>
@@ -580,6 +617,9 @@
 
             <!-- Healthcare -->
             <div class="portfolio-card" data-category="healthcare">
+                <div class="portfolio-image">
+                    <img src="hyper-pets.png" alt="Hyper Pets" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Pet Care</span>
                     <h3>Hyper Pets</h3>
@@ -592,6 +632,9 @@
 
             <!-- SaaS/B2B -->
             <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-image">
+                    <img src="alimtalk.png" alt="알림톡 서비스" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Notification</span>
                     <h3>알림톡 서비스</h3>
@@ -614,6 +657,9 @@
             </div>
 
             <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-image">
+                    <img src="cass.png" alt="CASS 시스템" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Analytics</span>
                     <h3>CASS 시스템</h3>
@@ -682,6 +728,9 @@
 
             <!-- Nonprofit -->
             <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-image">
+                    <img src="t-link.png" alt="T-Link 단기선교" loading="lazy">
+                </div>
                 <div class="portfolio-content">
                     <span class="portfolio-type">Nonprofit</span>
                     <h3>T-Link 단기선교</h3>
