@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>조슈아 솔루션 - 검증된 개발팀과 함께하세요</title>
     <meta name="description" content="17년 경력의 전문 개발팀. 웹/앱 개발, AI 솔루션을 빠르고 안정적으로 구축합니다.">
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
         :root {
@@ -59,11 +58,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--gray-900);
-        }
+        .logo { font-size: 20px; font-weight: 800; color: var(--gray-900); }
         .logo span { color: var(--primary); }
         .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-links a { color: var(--gray-600); font-size: 15px; font-weight: 500; }
@@ -120,10 +115,7 @@
             border: none;
             cursor: pointer;
         }
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
+        .btn-primary { background: var(--primary); color: var(--white); }
         .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
         .btn-secondary {
             background: var(--white);
@@ -133,10 +125,7 @@
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
 
         /* Stats */
-        .stats {
-            padding: 60px 24px;
-            background: var(--white);
-        }
+        .stats { padding: 60px 24px; background: var(--white); }
         .stats-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -159,18 +148,9 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .section-header h2 {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-        .section-header p {
-            color: var(--gray-500);
-            font-size: 18px;
-        }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 36px; margin-bottom: 16px; }
+        .section-header p { color: var(--gray-500); font-size: 18px; }
 
         /* Services */
         .services { background: var(--gray-50); max-width: 100%; }
@@ -201,7 +181,8 @@
             justify-content: center;
             margin-bottom: 20px;
             color: var(--white);
-            font-size: 24px;
+            font-size: 20px;
+            font-weight: 700;
         }
         .service-card h3 { font-size: 20px; margin-bottom: 12px; }
         .service-card p { color: var(--gray-500); font-size: 15px; line-height: 1.7; }
@@ -215,10 +196,35 @@
             font-weight: 500;
         }
 
+        /* Portfolio Filter */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            border: none;
+        }
+        .filter-tab:hover { background: var(--gray-200); }
+        .filter-tab.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
         /* Portfolio */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
         }
         .portfolio-card {
@@ -232,24 +238,22 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
         }
-        .portfolio-content { padding: 28px; }
+        .portfolio-card.hidden { display: none; }
+        .portfolio-content { padding: 24px; }
         .portfolio-type {
             display: inline-block;
             background: var(--primary);
             color: var(--white);
             padding: 4px 12px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             margin-bottom: 12px;
         }
-        .portfolio-card h3 { font-size: 20px; margin-bottom: 12px; }
-        .portfolio-card p { color: var(--gray-500); font-size: 14px; line-height: 1.7; }
-        .portfolio-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-        .portfolio-tech span {
-            color: var(--gray-400);
-            font-size: 13px;
-        }
+        .portfolio-card h3 { font-size: 18px; margin-bottom: 10px; }
+        .portfolio-card p { color: var(--gray-500); font-size: 14px; line-height: 1.6; }
+        .portfolio-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+        .portfolio-tech span { color: var(--gray-400); font-size: 12px; }
 
         /* Process */
         .process { background: var(--gray-50); max-width: 100%; }
@@ -282,34 +286,6 @@
         .process-step h3 { font-size: 18px; margin-bottom: 8px; }
         .process-step p { color: var(--gray-500); font-size: 14px; }
 
-        /* Why Us */
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-        .why-card {
-            background: var(--white);
-            padding: 32px;
-            border-radius: 16px;
-            border: 1px solid var(--gray-100);
-            display: flex;
-            gap: 20px;
-        }
-        .why-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gray-100);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 24px;
-        }
-        .why-card h3 { font-size: 18px; margin-bottom: 8px; }
-        .why-card p { color: var(--gray-500); font-size: 14px; }
-
         /* CTA */
         .cta {
             text-align: center;
@@ -319,10 +295,7 @@
         }
         .cta h2 { color: var(--white); font-size: 36px; margin-bottom: 16px; }
         .cta p { color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 32px; }
-        .cta .btn-primary {
-            background: var(--white);
-            color: var(--primary);
-        }
+        .cta .btn-primary { background: var(--white); color: var(--primary); }
         .cta .btn-primary:hover { background: var(--gray-100); }
 
         /* Footer */
@@ -341,7 +314,6 @@
             .nav-links { display: none; }
             .stats-container { grid-template-columns: repeat(2, 1fr); }
             .process-grid { grid-template-columns: repeat(2, 1fr); }
-            .why-grid { grid-template-columns: 1fr; }
             .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -443,18 +415,23 @@
             <h2>성공적으로 완료한 프로젝트</h2>
             <p>다양한 분야에서 검증된 개발 역량을 확인하세요</p>
         </div>
+        
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">전체</button>
+            <button class="filter-tab" data-filter="ai">AI/ML</button>
+            <button class="filter-tab" data-filter="ecommerce">E-Commerce</button>
+            <button class="filter-tab" data-filter="mobility">Mobility</button>
+            <button class="filter-tab" data-filter="edtech">EdTech</button>
+            <button class="filter-tab" data-filter="fintech">FinTech</button>
+            <button class="filter-tab" data-filter="healthcare">Healthcare</button>
+            <button class="filter-tab" data-filter="saas">SaaS/B2B</button>
+            <button class="filter-tab" data-filter="enterprise">Enterprise</button>
+        </div>
+
         <div class="portfolio-grid">
-            <div class="portfolio-card">
-                <div class="portfolio-content">
-                    <span class="portfolio-type">E-Commerce</span>
-                    <h3>바통마켓</h3>
-                    <p>실패한 외주 프로젝트를 완전 재개발하여 성공적인 이커머스 플랫폼으로 전환. 재오픈 후 2,000명 회원 유치 달성.</p>
-                    <div class="portfolio-tech">
-                        <span>Next.js</span><span>·</span><span>Django</span><span>·</span><span>AWS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio-card">
+            <!-- AI/ML -->
+            <div class="portfolio-card" data-category="ai">
                 <div class="portfolio-content">
                     <span class="portfolio-type">AI Platform</span>
                     <h3>리라 (Re:La)</h3>
@@ -464,43 +441,253 @@
                     </div>
                 </div>
             </div>
-            <div class="portfolio-card">
-                <div class="portfolio-content">
-                    <span class="portfolio-type">Mobility</span>
-                    <h3>KD-DSP</h3>
-                    <p>국내 최대 운송그룹 디지털 전환 프로젝트. 5,000대 이상 차량 실시간 관제 플랫폼.</p>
-                    <div class="portfolio-tech">
-                        <span>React</span><span>·</span><span>NestJS</span><span>·</span><span>React Native</span>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio-card">
+
+            <div class="portfolio-card" data-category="ai">
                 <div class="portfolio-content">
                     <span class="portfolio-type">AI Marketing</span>
                     <h3>Artnex</h3>
-                    <p>AI 기반 퍼스널 컬러 및 브랜드 진단 마케팅 플랫폼. 22가지 스타일 분석 시스템.</p>
+                    <p>AI 기반 퍼스널 컬러 및 브랜드 진단 마케팅 플랫폼. 22가지 스타일, 148개 퀴즈 문항 분석 시스템.</p>
                     <div class="portfolio-tech">
                         <span>Next.js</span><span>·</span><span>FastAPI</span><span>·</span><span>OpenAI</span>
                     </div>
                 </div>
             </div>
-            <div class="portfolio-card">
+
+            <div class="portfolio-card" data-category="ai">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">AI Healthcare</span>
+                    <h3>의료광고 AI 심의</h3>
+                    <p>의료법 기반 광고 문구 자동 심의 시스템. AI가 위반 가능성 분석 및 수정 제안.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>OpenAI</span><span>·</span><span>Supabase</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="ai">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">AI Audio</span>
+                    <h3>AI 오디오북 제작</h3>
+                    <p>텍스트를 자연스러운 음성으로 변환하는 AI 오디오북 자동 생성 서비스.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>TTS API</span><span>·</span><span>TypeScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="ai">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">AI Retail</span>
+                    <h3>LMTC 바자회 시스템</h3>
+                    <p>Gemini AI 활용 교회 바자회 운영 플랫폼. 실시간 재고 관리 및 AI 상품 추천.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>Gemini AI</span><span>·</span><span>Supabase</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-Commerce -->
+            <div class="portfolio-card" data-category="ecommerce">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">E-Commerce</span>
+                    <h3>바통마켓</h3>
+                    <p>실패한 외주 프로젝트를 완전 재개발하여 성공적인 이커머스 플랫폼으로 전환. 재오픈 후 2,000명 회원 유치.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>Django</span><span>·</span><span>Sanity.io</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="ecommerce">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Group Buying</span>
+                    <h3>둥지마켓</h3>
+                    <p>집단 구매력을 통한 합리적인 소비 플랫폼. 투명한 입찰 시스템과 지역 기반 타겟팅.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>Django 5</span><span>·</span><span>PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobility -->
+            <div class="portfolio-card" data-category="mobility">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Mobility</span>
+                    <h3>KD-DSP</h3>
+                    <p>국내 최대 운송그룹 디지털 전환 프로젝트. 5,000대 이상 차량 실시간 관제 및 통합 모빌리티 플랫폼.</p>
+                    <div class="portfolio-tech">
+                        <span>React</span><span>·</span><span>NestJS</span><span>·</span><span>React Native</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="mobility">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Parking</span>
+                    <h3>발렛주차 서비스</h3>
+                    <p>발렛 파킹 예약 및 실시간 차량 위치 추적 서비스. 호텔/백화점 B2B 연동.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>Supabase</span><span>·</span><span>Maps API</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EdTech -->
+            <div class="portfolio-card" data-category="edtech">
                 <div class="portfolio-content">
                     <span class="portfolio-type">EdTech</span>
                     <h3>Ownabee</h3>
-                    <p>AI 기반 맞춤형 동화책 생성 플랫폼. 어린이집 및 유치원 B2B 모델.</p>
+                    <p>AI가 만들어주는 우리 아이만의 특별한 동화. 기관(어린이집, 유치원) B2B 모델.</p>
                     <div class="portfolio-tech">
                         <span>React Native</span><span>·</span><span>Supabase</span><span>·</span><span>OpenAI</span>
                     </div>
                 </div>
             </div>
-            <div class="portfolio-card">
+
+            <div class="portfolio-card" data-category="edtech">
                 <div class="portfolio-content">
-                    <span class="portfolio-type">MVP Series</span>
-                    <h3>Tinkercrew</h3>
-                    <p>주 1회 앱 출시 프로젝트. 알림톡, 발렛주차, 감정일기, 의료광고AI 등 10개 이상 MVP 런칭.</p>
+                    <span class="portfolio-type">Language Learning</span>
+                    <h3>Tweak</h3>
+                    <p>게이미피케이션 기반 영어 학습 플랫폼. 레벨별 맞춤 콘텐츠와 학습 진도 추적.</p>
+                    <div class="portfolio-tech">
+                        <span>Flutter</span><span>·</span><span>Django</span><span>·</span><span>Redis</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FinTech -->
+            <div class="portfolio-card" data-category="fintech">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Blockchain</span>
+                    <h3>NFT 마켓플레이스</h3>
+                    <p>블록체인 기반 디지털 자산 발행 및 거래 플랫폼. 스마트 컨트랙트 개발.</p>
+                    <div class="portfolio-tech">
+                        <span>Solidity</span><span>·</span><span>Web3.js</span><span>·</span><span>React</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="fintech">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Crypto</span>
+                    <h3>거래소 MM봇</h3>
+                    <p>거래소 유동성 공급봇 장애 해결 및 코스모스허브4 업그레이드 대응으로 수익 회복.</p>
+                    <div class="portfolio-tech">
+                        <span>Cosmos SDK</span><span>·</span><span>Node.js</span><span>·</span><span>Kafka</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthcare -->
+            <div class="portfolio-card" data-category="healthcare">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Pet Care</span>
+                    <h3>Hyper Pets</h3>
+                    <p>반려인을 위한 올인원 플랫폼. 프로필 관리, 건강 기록, 커뮤니티 기능.</p>
+                    <div class="portfolio-tech">
+                        <span>React Native</span><span>·</span><span>FastAPI</span><span>·</span><span>AWS S3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SaaS/B2B -->
+            <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Notification</span>
+                    <h3>알림톡 서비스</h3>
+                    <p>카카오 알림톡 자동 발송 시스템. 템플릿 관리, 예약 발송, 발송 통계 대시보드.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>Kakao API</span><span>·</span><span>Supabase</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Smart Building</span>
+                    <h3>스마트빌딩 관제</h3>
+                    <p>IoT 센서 기반 빌딩 에너지 관리 및 시설물 모니터링 대시보드.</p>
+                    <div class="portfolio-tech">
+                        <span>React</span><span>·</span><span>Node.js</span><span>·</span><span>MQTT</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Analytics</span>
+                    <h3>CASS 시스템</h3>
+                    <p>기업용 데이터 분석 및 관리 대시보드 시스템. 실시간 리포팅.</p>
+                    <div class="portfolio-tech">
+                        <span>Vue 3</span><span>·</span><span>FastAPI</span><span>·</span><span>PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Diary</span>
+                    <h3>오늘뭐했니 (3줄 일기)</h3>
+                    <p>간단한 3줄 일기 앱. 매일 기록하는 습관 형성을 위한 미니멀 디자인.</p>
                     <div class="portfolio-tech">
                         <span>Next.js</span><span>·</span><span>Supabase</span><span>·</span><span>Vercel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Wellness</span>
+                    <h3>감정일기</h3>
+                    <p>AI 기반 감정 분석 일기 앱. 일상의 감정을 기록하고 패턴을 분석.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>OpenAI</span><span>·</span><span>Supabase</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="portfolio-card" data-category="enterprise">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Enterprise</span>
+                    <h3>대한행정공제회 차세대</h3>
+                    <p>이자율 계산 프로시저 50개를 1개로 통합하여 유지보수 효율성 80% 향상.</p>
+                    <div class="portfolio-tech">
+                        <span>Java</span><span>·</span><span>Spring</span><span>·</span><span>Oracle</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="enterprise">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Insurance</span>
+                    <h3>KB손해보험 영업지원</h3>
+                    <p>영업 채널 고도화 및 신한생명 오렌지라이프 통합 프로젝트.</p>
+                    <div class="portfolio-tech">
+                        <span>Java</span><span>·</span><span>Spring</span><span>·</span><span>Oracle</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="enterprise">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Audio System</span>
+                    <h3>KT AI BGM 서비스</h3>
+                    <p>멀티존 오디오 제어 시스템 개발. 컴퓨터프로그램저작물 등록 및 특허 출원.</p>
+                    <div class="portfolio-tech">
+                        <span>Python</span><span>·</span><span>WebSocket</span><span>·</span><span>PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nonprofit -->
+            <div class="portfolio-card" data-category="saas">
+                <div class="portfolio-content">
+                    <span class="portfolio-type">Nonprofit</span>
+                    <h3>T-Link 단기선교</h3>
+                    <p>선교사와 단기선교팀을 연결하는 글로벌 플랫폼. 기부/후원 결제 시스템 및 다국어 지원.</p>
+                    <div class="portfolio-tech">
+                        <span>Next.js</span><span>·</span><span>Django</span><span>·</span><span>Stripe</span>
                     </div>
                 </div>
             </div>
@@ -539,44 +726,6 @@
         </div>
     </section>
 
-    <!-- Why Us -->
-    <section>
-        <div class="section-header">
-            <h2>왜 조슈아 솔루션인가요?</h2>
-            <p>다른 개발사와의 차별점을 확인하세요</p>
-        </div>
-        <div class="why-grid">
-            <div class="why-card">
-                <div class="why-icon">⚡</div>
-                <div>
-                    <h3>빠른 개발 속도</h3>
-                    <p>17년 경험의 노하우로 일반 개발사 대비 2~3배 빠른 개발. MVP는 2주 내 출시 가능.</p>
-                </div>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">💬</div>
-                <div>
-                    <h3>원활한 소통</h3>
-                    <p>개발자와 직접 소통. 기획 의도를 정확히 이해하고 기술적 제안까지 드립니다.</p>
-                </div>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">🎯</div>
-                <div>
-                    <h3>풀스택 역량</h3>
-                    <p>프론트엔드, 백엔드, DB, 인프라 전 영역 커버. 일관된 품질을 보장합니다.</p>
-                </div>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">🔒</div>
-                <div>
-                    <h3>안정적인 품질</h3>
-                    <p>금융권 대형 시스템 경험. 보안, 성능, 확장성을 고려한 설계.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA -->
     <section class="cta" id="contact">
         <h2>프로젝트를 시작할 준비가 되셨나요?</h2>
@@ -595,6 +744,29 @@
     </footer>
 
     <script>
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Filter cards
+                const filter = tab.dataset.filter;
+                portfolioCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
