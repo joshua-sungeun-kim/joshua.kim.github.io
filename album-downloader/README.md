@@ -14,7 +14,7 @@ pip install -r requirements.txt
 ```bash
 python album_dl.py "아이유"              # 목록 확인 후 번호로 선택 (예: 1,3,5-7)
 python album_dl.py "IU" --all            # 전체 앨범 다운로드
-python album_dl.py "IU" --all --singles  # 싱글/EP 포함
+python album_dl.py "IU" --all --albums-only  # 정규 앨범만 (기본은 싱글/EP/미니앨범 포함)
 python album_dl.py "IU" --list           # 목록만 보기
 python album_dl.py "IU" -o ~/Music --format m4a
 ```
