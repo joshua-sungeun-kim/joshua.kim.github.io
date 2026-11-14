@@ -2,7 +2,27 @@
 
 가수 이름을 입력하면 YouTube Music에서 앨범 목록을 찾고, 앨범별 폴더로 오디오를 내려받는 CLI입니다.
 
-## 준비
+## 안드로이드(Termux)에서 한 번에 설정
+
+Termux를 처음 설치한 상태에서 아래 세 줄만 실행하면 됩니다.
+
+```bash
+pkg install -y git
+git clone https://github.com/joshua-sungeun-kim/joshua.kim.github.io.git
+bash joshua.kim.github.io/album-downloader/termux-setup.sh
+```
+
+중간에 저장소 접근 권한 팝업이 뜨면 **허용**을 누르세요. 끝나면 어디서든 이렇게 쓰면 됩니다.
+
+```bash
+album "가수 이름"           # 목록을 보고 번호로 골라서 받기
+album "가수 이름" --all     # 전부 받기
+```
+
+받은 파일은 폰의 `Music/가수/연도 - 앨범/` 폴더에 저장됩니다.
+코드가 업데이트되면 `cd ~/joshua.kim.github.io && git pull`로 갱신하세요.
+
+## 직접 설치하기(PC 등)
 
 ```bash
 pip install -r requirements.txt
@@ -14,7 +34,7 @@ pip install -r requirements.txt
 ```bash
 python album_dl.py "아이유"              # 목록 확인 후 번호로 선택 (예: 1,3,5-7)
 python album_dl.py "IU" --all            # 전체 앨범 다운로드
-python album_dl.py "IU" --all --singles  # 싱글/EP 포함
+python album_dl.py "IU" --all --albums-only  # 정규 앨범만 (기본은 싱글/EP/미니앨범 포함)
 python album_dl.py "IU" --list           # 목록만 보기
 python album_dl.py "IU" -o ~/Music --format m4a
 ```

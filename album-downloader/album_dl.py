@@ -4,7 +4,7 @@
 사용 예:
     python album_dl.py "아이유"                 # 앨범 목록을 보고 번호로 고르기
     python album_dl.py "IU" --all               # 전부 다운로드
-    python album_dl.py "IU" --all --singles     # 싱글/EP도 포함
+    python album_dl.py "IU" --all --albums-only # 정규 앨범만 (기본은 싱글/EP 포함)
     python album_dl.py "IU" --list              # 목록만 출력
 """
 import argparse
@@ -21,20 +21,33 @@ def clean(name: str) -> str:
     return re.sub(r'[\\/:*?"<>|]', "_", name).strip().rstrip(".")
 
 
-def find_artist(yt: YTMusic, query: str) -> dict:
-    results = yt.search(query, filter="artists", limit=5)
+def find_artists(yt: YTMusic, query: str) -> list[dict]:
+    """검색된 아티스트 후보를 구독자 수/대표 앨범과 함께 보여주고 고르게 한다.
+
+    같은 가수가 채널 여러 개로 나뉘어 있을 수 있어서 여러 개를 동시에 고를 수 있다.
+    """
+    results = yt.search(query, filter="artists", limit=10)
     if not results:
         sys.exit(f"'{query}' 아티스트를 찾지 못했습니다.")
-    if len(results) > 1:
-        print("검색된 아티스트:")
-        for i, r in enumerate(results, 1):
-            print(f"  {i}. {r['artist']}")
-        pick = input("번호 선택 [1]: ").strip() or "1"
-        return results[int(pick) - 1]
-    return results[0]
+    if len(results) == 1:
+        return results
+
+    print("검색된 아티스트:")
+    for i, r in enumerate(results, 1):
+        info = ""
+        try:
+            a = yt.get_artist(r["browseId"])
+            titles = [x["title"] for x in (a.get("albums") or {}).get("results", [])[:3]]
+            info = f"  구독자 {a.get('subscribers', '?')} | " + (", ".join(titles) or "앨범 없음")
+        except Exception:
+            pass
+        print(f"  {i}. {r['artist']}{info}")
+    pick = input("번호 선택 (여러 개면 1,2 / 기본 1): ").strip() or "1"
+    idx = [int(x) for x in re.findall(r"\d+", pick)]  # 방향키 등 이상한 입력은 무시
+    return [results[i - 1] for i in idx if 1 <= i <= len(results)]
 
 
-def fetch_releases(yt: YTMusic, browse_id: str, include_singles: bool) -> list[dict]:
+def fetch_releases(yt: YTMusic, browse_id: str, include_singles: bool = True) -> list[dict]:
     artist = yt.get_artist(browse_id)
     releases = []
     sections = ["albums"] + (["singles"] if include_singles else [])
@@ -60,7 +73,7 @@ def fetch_releases(yt: YTMusic, browse_id: str, include_singles: bool) -> list[d
 def choose(releases: list[dict]) -> list[dict]:
     print("\n앨범 목록:")
     for i, r in enumerate(releases, 1):
-        print(f"  {i:>2}. [{r.get('year', '----')}] {r['title']} ({r['kind']})")
+        print(f"  {i:>2}. [{r.get('year', '----')}] {r['title']} ({r.get('type') or r['kind']})")
     raw = input("\n받을 번호 (예: 1,3,5-7 / all): ").strip().lower()
     if raw in ("all", "a"):
         return releases
@@ -112,22 +125,30 @@ def main():
     p.add_argument("artist", help="가수 이름")
     p.add_argument("-o", "--out", default="downloads", help="저장 폴더 (기본: downloads)")
     p.add_argument("--all", action="store_true", help="물어보지 않고 전부 다운로드")
-    p.add_argument("--singles", action="store_true", help="싱글/EP도 포함")
+    p.add_argument("--albums-only", action="store_true", help="정규 앨범만 (기본은 싱글/EP/미니앨범 포함)")
     p.add_argument("--list", action="store_true", help="목록만 출력하고 종료")
     p.add_argument("--format", default="mp3", choices=["mp3", "m4a", "opus", "flac"],
                    help="오디오 형식 (기본: mp3)")
     args = p.parse_args()
 
     yt = YTMusic()
-    artist = find_artist(yt, args.artist)
-    print(f"\n아티스트: {artist['artist']}")
-    releases = fetch_releases(yt, artist["browseId"], args.singles)
+    artists = find_artists(yt, args.artist)
+    if not artists:
+        sys.exit("아티스트를 선택하지 않았습니다.")
+    artist = artists[0]  # 폴더 이름에 쓸 대표 이름
+    print(f"\n아티스트: {', '.join(a['artist'] for a in artists)}")
+    releases, seen = [], set()
+    for a in artists:  # 여러 채널을 고른 경우 앨범을 합치고 중복은 제거
+        for r in fetch_releases(yt, a["browseId"], not args.albums_only):
+            if r["browseId"] not in seen:
+                seen.add(r["browseId"])
+                releases.append(r)
     if not releases:
         sys.exit("앨범을 찾지 못했습니다.")
 
     if args.list:
         for r in releases:
-            print(f"[{r.get('year', '----')}] {r['title']} ({r['kind']})")
+            print(f"[{r.get('year', '----')}] {r['title']} ({r.get('type') or r['kind']})")
         return
 
     selected = releases if args.all else choose(releases)
