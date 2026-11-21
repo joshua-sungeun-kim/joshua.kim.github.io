@@ -17,7 +17,7 @@
 <body>
 <canvas id="c"></canvas>
 <script>
-const W = 400, H = 640, GAP = 90, PERFECT = 0.06, GOOD = 0.13;
+const W = 400, H = 640, GAP = 90, PERFECT = 0.08, GOOD = 0.18;
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const dpr = Math.min(window.devicePixelRatio || 1, 2);
 cv.width = W * dpr; cv.height = H * dpr; g.scale(dpr, dpr);
@@ -93,7 +93,7 @@ function platX(i) {
 function start() {
   initAudio();
   state = 'play';
-  beats = []; beatNo = 0; bpm = 100; nextBeat = ac.currentTime + 0.4;
+  beats = []; beatNo = 0; bpm = 80; nextBeat = ac.currentTime + 0.4;
   level = 0; combo = 0; maxCombo = 0; lives = 3; score = 0;
   plats = [W / 2]; cam = 0; jump = null; fx = null; parts = []; shake = 0; pulse = 0;
 }
@@ -112,8 +112,10 @@ function press() {
   let b = null, d = 1e9;
   for (const x of beats) if (!x.done && Math.abs(x.t - t) < d) { d = Math.abs(x.t - t); b = x; }
   if (!b || d > GOOD) {
-    if (b && d < 0.3) b.done = true;       // 같은 박자로 두 번 감점되지 않게
-    if (beatNo > 4 || b) miss();
+    if (beatNo > 4) {                      // 엇박은 ♥를 깎지 않고 콤보만 끊는다
+      combo = 0;
+      say(b && b.t > t ? '빨라요' : '늦었어요', '#8a93a8');
+    }
     return;
   }
   b.done = true;
@@ -125,7 +127,7 @@ function press() {
   if (combo % 20 === 0 && lives < 3) lives++;
   jump = { from: level, t: performance.now(), dur: Math.min(260, b.iv * 500) };
   level++;
-  if (level % 8 === 0 && bpm < 180) bpm += 5;
+  if (level % 10 === 0 && bpm < 150) bpm += 4;
   const px = platX(level), py = sy(level);
   for (let i = 0; i < (perfect ? 14 : 6); i++)
     parts.push({ x: px, y: py, vx: (Math.random() - 0.5) * 5, vy: -Math.random() * 4, life: 1,
@@ -172,14 +174,17 @@ function frame() {
     const lo = Math.max(0, level - 3);
     for (let i = lo; i < level + 8; i++) {
       const x = platX(i), y = sy(i);
-      g.fillStyle = i === level + 1 ? '#f5c542' : i <= level ? '#1f8f82' : '#2dd4bf';
-      rr(x - 36, y, 72, 12, 6);
+      const hot = i === level + 1 && nb && nb.n >= 4 && !nb.done && Math.abs(nb.t - t) <= GOOD;
+      if (hot) { g.shadowColor = '#fff'; g.shadowBlur = 24; }
+      g.fillStyle = hot ? '#fff' : i === level + 1 ? '#f5c542' : i <= level ? '#1f8f82' : '#2dd4bf';
+      rr(x - 36, y - (hot ? 2 : 0), 72, hot ? 16 : 12, 6);
+      g.shadowBlur = 0;
     }
     // 박자 링
     if (nb && state === 'play') {
       const f = Math.max(0, Math.min(1, (nb.t - t) / nb.iv));
       const x = platX(level + 1), y = sy(level + 1) + 6;
-      g.strokeStyle = f < 0.15 ? '#f5c542' : 'rgba(45,212,191,.8)';
+      g.strokeStyle = Math.abs(nb.t - t) <= GOOD ? '#fff' : 'rgba(45,212,191,.8)';
       g.lineWidth = 3;
       g.beginPath(); g.arc(x, y, 16 + f * 60, 0, 7); g.stroke();
       g.strokeStyle = 'rgba(255,255,255,.25)'; g.lineWidth = 1.5;
@@ -229,10 +234,10 @@ function frame() {
   if (state === 'title') {
     g.fillStyle = '#f5c542'; g.font = 'bold 44px sans-serif'; g.fillText('리듬 점프', W / 2, 230);
     g.fillStyle = '#e8ecf5'; g.font = '17px sans-serif';
-    g.fillText('링이 발판에 딱 맞는 순간, 박자에 맞춰', W / 2, 290);
+    g.fillText('다음 발판이 하얗게 빛날 때, 쿵 소리에 맞춰', W / 2, 290);
     g.fillText('스페이스바 / 화면 터치로 점프!', W / 2, 316);
     g.fillStyle = '#8a93a8'; g.font = '14px sans-serif';
-    g.fillText('박자를 놓치거나 엇박에 누르면 ♥ 감소', W / 2, 356);
+    g.fillText('박자를 그냥 지나치면 ♥ 감소 (엇박은 콤보만 끊겨요)', W / 2, 356);
     g.fillText('20콤보마다 ♥ 회복 · 올라갈수록 빨라져요', W / 2, 378);
     g.fillStyle = '#2dd4bf'; g.font = 'bold 20px sans-serif';
     if (Math.floor(pn / 500) % 2) g.fillText('눌러서 시작', W / 2, 450);
