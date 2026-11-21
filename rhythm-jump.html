@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>리듬 점프</title>
+<style>
+  :root { --bg:#0b0f1a; --gold:#f5c542; --teal:#2dd4bf; --text:#e8ecf5; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; background:var(--bg); overflow:hidden; touch-action:none;
+    font-family:-apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  body { display:flex; align-items:center; justify-content:center; }
+  canvas { width:min(100vw, 62.5vh); height:min(100vh, 160vw); display:block;
+    border-radius:12px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const W = 400, H = 640, GAP = 90, PERFECT = 0.08, GOOD = 0.18;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const dpr = Math.min(window.devicePixelRatio || 1, 2);
+cv.width = W * dpr; cv.height = H * dpr; g.scale(dpr, dpr);
+
+let ac = null, noiseBuf = null;
+let state = 'title';           // title | play | over
+let beats, nextBeat, beatNo, bpm;
+let level, combo, maxCombo, lives, score, best = 0;
+let plats, cam, jump, fx, parts, shake, pulse;
+try { best = +localStorage.getItem('rhythmJumpBest') || 0; } catch (e) {}
+
+// ---------- 오디오 ----------
+function initAudio() {
+  if (!ac) {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    noiseBuf = ac.createBuffer(1, ac.sampleRate * 0.1, ac.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  if (ac.state === 'suspended') ac.resume();
+}
+function tone(t, f0, f1, dur, vol, type) {
+  const o = ac.createOscillator(), a = ac.createGain();
+  o.type = type || 'sine';
+  o.frequency.setValueAtTime(f0, t);
+  if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+  a.gain.setValueAtTime(vol, t);
+  a.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  o.connect(a).connect(ac.destination);
+  o.start(t); o.stop(t + dur + 0.02);
+}
+function hat(t) {
+  const s = ac.createBufferSource(), f = ac.createBiquadFilter(), a = ac.createGain();
+  s.buffer = noiseBuf; f.type = 'highpass'; f.frequency.value = 7000;
+  a.gain.setValueAtTime(0.12, t);
+  a.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+  s.connect(f).connect(a).connect(ac.destination);
+  s.start(t); s.stop(t + 0.06);
+}
+const BASS = [110, 110, 130.8, 110, 146.8, 146.8, 164.8, 130.8];
+function playBeat(t, n) {
+  tone(t, 150, 40, 0.16, 0.7);                              // 킥
+  if (n >= 4) tone(t, BASS[n % 8], 0, 0.22, 0.18, 'triangle'); // 베이스
+  else tone(t, n === 3 ? 880 : 660, 0, 0.1, 0.2, 'square');    // 카운트인
+}
+// 귀에 들리는 시점 기준 현재 시각
+function now() { return ac.currentTime - (ac.outputLatency || ac.baseLatency || 0); }
+
+function schedule() {
+  if (nextBeat < ac.currentTime - 0.2) {      // 탭 전환 등으로 밀렸을 때 복구
+    beats.forEach(b => b.done = true);
+    nextBeat = ac.currentTime + 0.5;
+  }
+  while (nextBeat < ac.currentTime + 0.15) {
+    const iv = 60 / bpm;
+    beats.push({ t: nextBeat, iv, done: beatNo < 4, n: beatNo });
+    playBeat(nextBeat, beatNo);
+    hat(nextBeat + iv / 2);
+    nextBeat += iv; beatNo++;
+  }
+}
+
+// ---------- 게임 로직 ----------
+function platX(i) {
+  while (plats.length <= i) {
+    const prev = plats[plats.length - 1];
+    let x = prev + (Math.random() < 0.5 ? -1 : 1) * (50 + Math.random() * 70);
+    if (x < 60) x = prev + 80; if (x > W - 60) x = prev - 80;
+    plats.push(x);
+  }
+  return plats[i];
+}
+function start() {
+  initAudio();
+  state = 'play';
+  beats = []; beatNo = 0; bpm = 80; nextBeat = ac.currentTime + 0.4;
+  level = 0; combo = 0; maxCombo = 0; lives = 3; score = 0;
+  plats = [W / 2]; cam = 0; jump = null; fx = null; parts = []; shake = 0; pulse = 0;
+}
+function say(text, color) { fx = { text, color, t: performance.now() }; }
+function miss() {
+  combo = 0; lives--; shake = 10; say('MISS', '#ff5d6c');
+  tone(ac.currentTime, 200, 80, 0.2, 0.25, 'sawtooth');
+  if (lives <= 0) {
+    state = 'over';
+    if (score > best) { best = score; try { localStorage.setItem('rhythmJumpBest', best); } catch (e) {} }
+  }
+}
+function press() {
+  if (state !== 'play') { start(); return; }
+  const t = now();
+  let b = null, d = 1e9;
+  for (const x of beats) if (!x.done && Math.abs(x.t - t) < d) { d = Math.abs(x.t - t); b = x; }
+  if (!b || d > GOOD) {
+    if (beatNo > 4) {                      // 엇박은 ♥를 깎지 않고 콤보만 끊는다
+      combo = 0;
+      say(b && b.t > t ? '빨라요' : '늦었어요', '#8a93a8');
+    }
+    return;
+  }
+  b.done = true;
+  const perfect = d <= PERFECT;
+  combo++; maxCombo = Math.max(maxCombo, combo);
+  score += (perfect ? 100 : 50) + combo * 2;
+  say(perfect ? 'PERFECT' : 'GOOD', perfect ? '#f5c542' : '#2dd4bf');
+  tone(ac.currentTime, perfect ? 880 : 660, perfect ? 1320 : 0, 0.12, 0.2, 'triangle');
+  if (combo % 20 === 0 && lives < 3) lives++;
+  jump = { from: level, t: performance.now(), dur: Math.min(260, b.iv * 500) };
+  level++;
+  if (level % 10 === 0 && bpm < 150) bpm += 4;
+  const px = platX(level), py = sy(level);
+  for (let i = 0; i < (perfect ? 14 : 6); i++)
+    parts.push({ x: px, y: py, vx: (Math.random() - 0.5) * 5, vy: -Math.random() * 4, life: 1,
+                 c: perfect ? '#f5c542' : '#2dd4bf' });
+}
+function sy(i) { return H - 150 - (i * GAP - cam); }
+
+// ---------- 그리기 ----------
+function rr(x, y, w, h, r) { g.beginPath(); g.roundRect(x, y, w, h, r); g.fill(); }
+function frame() {
+  requestAnimationFrame(frame);
+  const pn = performance.now();
+  let t = 0, nb = null;
+  if (state === 'play') {
+    schedule();
+    t = now();
+    for (const b of beats) {
+      if (!b.done && t > b.t + GOOD) { b.done = true; miss(); if (state !== 'play') break; }
+      if (b.n < 4 && !b.hit && t >= b.t) { b.hit = true; pulse = 1; }
+    }
+    beats = beats.filter(b => b.t > t - 1);
+    nb = beats.find(b => b.t > t - GOOD && (!b.done || b.n < 4));
+    for (const b of beats) if (!b.hit && t >= b.t) { b.hit = true; pulse = 1; }
+  }
+  cam += ((level * GAP) - cam) * 0.12;
+  pulse *= 0.9; shake *= 0.85;
+
+  g.save();
+  g.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
+  const bg = g.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#141b33'); bg.addColorStop(1, '#0b0f1a');
+  g.fillStyle = bg; g.fillRect(-10, -10, W + 20, H + 20);
+  g.fillStyle = `rgba(45,212,191,${pulse * 0.08})`; g.fillRect(-10, -10, W + 20, H + 20);
+
+  // 별
+  g.fillStyle = 'rgba(255,255,255,.35)';
+  for (let i = 0; i < 40; i++) {
+    const x = (i * 97) % W, y = ((i * 173 + cam * 0.3) % H + H) % H;
+    g.fillRect(x, y, 2, 2);
+  }
+
+  if (state !== 'title') {
+    // 발판
+    const lo = Math.max(0, level - 3);
+    for (let i = lo; i < level + 8; i++) {
+      const x = platX(i), y = sy(i);
+      const hot = i === level + 1 && nb && nb.n >= 4 && !nb.done && Math.abs(nb.t - t) <= GOOD;
+      if (hot) { g.shadowColor = '#fff'; g.shadowBlur = 24; }
+      g.fillStyle = hot ? '#fff' : i === level + 1 ? '#f5c542' : i <= level ? '#1f8f82' : '#2dd4bf';
+      rr(x - 36, y - (hot ? 2 : 0), 72, hot ? 16 : 12, 6);
+      g.shadowBlur = 0;
+    }
+    // 박자 링
+    if (nb && state === 'play') {
+      const f = Math.max(0, Math.min(1, (nb.t - t) / nb.iv));
+      const x = platX(level + 1), y = sy(level + 1) + 6;
+      g.strokeStyle = Math.abs(nb.t - t) <= GOOD ? '#fff' : 'rgba(45,212,191,.8)';
+      g.lineWidth = 3;
+      g.beginPath(); g.arc(x, y, 16 + f * 60, 0, 7); g.stroke();
+      g.strokeStyle = 'rgba(255,255,255,.25)'; g.lineWidth = 1.5;
+      g.beginPath(); g.arc(x, y, 16, 0, 7); g.stroke();
+    }
+    // 캐릭터
+    let px = platX(level), py = sy(level), sq = 1 + pulse * 0.15;
+    if (jump) {
+      const p = Math.min(1, (pn - jump.t) / jump.dur);
+      px = platX(jump.from) + (px - platX(jump.from)) * p;
+      py = sy(jump.from) + (py - sy(jump.from)) * p - Math.sin(Math.PI * p) * 45;
+      sq = 0.85;
+      if (p >= 1) jump = null;
+    }
+    g.save(); g.translate(px, py); g.scale(sq, 2 - sq);
+    g.fillStyle = '#f5c542'; rr(-15, -30, 30, 30, 8);
+    g.fillStyle = '#0b0f1a'; g.fillRect(-8, -21, 5, 6); g.fillRect(4, -21, 5, 6);
+    g.restore();
+    // 파티클
+    for (const p of parts) {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.life -= 0.03;
+      g.globalAlpha = Math.max(0, p.life); g.fillStyle = p.c; g.fillRect(p.x, p.y, 4, 4);
+    }
+    g.globalAlpha = 1; parts = parts.filter(p => p.life > 0);
+
+    // HUD
+    g.fillStyle = '#e8ecf5'; g.textAlign = 'left'; g.font = 'bold 22px sans-serif';
+    g.fillText(score, 16, 34);
+    g.font = '13px sans-serif'; g.fillStyle = '#8a93a8';
+    g.fillText(`${level}층 · ${bpm} BPM`, 16, 54);
+    g.textAlign = 'right'; g.font = '20px sans-serif';
+    g.fillStyle = '#ff5d6c'; g.fillText('♥'.repeat(Math.max(0, lives)), W - 16, 34);
+    if (combo > 1) { g.fillStyle = '#f5c542'; g.font = 'bold 15px sans-serif'; g.fillText(combo + ' COMBO', W - 16, 56); }
+    g.textAlign = 'center';
+    if (fx && pn - fx.t < 500) {
+      const a = 1 - (pn - fx.t) / 500;
+      g.globalAlpha = a; g.fillStyle = fx.color; g.font = 'bold 30px sans-serif';
+      g.fillText(fx.text, W / 2, 150 - (1 - a) * 20); g.globalAlpha = 1;
+    }
+    if (state === 'play' && nb && nb.n < 4) {
+      g.fillStyle = '#e8ecf5'; g.font = 'bold 64px sans-serif';
+      g.fillText(nb.n === 3 ? 'GO!' : 3 - nb.n, W / 2, H / 2 - 40);
+    }
+  }
+
+  g.textAlign = 'center';
+  if (state === 'title') {
+    g.fillStyle = '#f5c542'; g.font = 'bold 44px sans-serif'; g.fillText('리듬 점프', W / 2, 230);
+    g.fillStyle = '#e8ecf5'; g.font = '17px sans-serif';
+    g.fillText('다음 발판이 하얗게 빛날 때, 쿵 소리에 맞춰', W / 2, 290);
+    g.fillText('스페이스바 / 화면 터치로 점프!', W / 2, 316);
+    g.fillStyle = '#8a93a8'; g.font = '14px sans-serif';
+    g.fillText('박자를 그냥 지나치면 ♥ 감소 (엇박은 콤보만 끊겨요)', W / 2, 356);
+    g.fillText('20콤보마다 ♥ 회복 · 올라갈수록 빨라져요', W / 2, 378);
+    g.fillStyle = '#2dd4bf'; g.font = 'bold 20px sans-serif';
+    if (Math.floor(pn / 500) % 2) g.fillText('눌러서 시작', W / 2, 450);
+    if (best) { g.fillStyle = '#8a93a8'; g.font = '14px sans-serif'; g.fillText('최고 기록 ' + best, W / 2, 490); }
+  } else if (state === 'over') {
+    g.fillStyle = 'rgba(11,15,26,.8)'; g.fillRect(-10, -10, W + 20, H + 20);
+    g.fillStyle = '#ff5d6c'; g.font = 'bold 40px sans-serif'; g.fillText('GAME OVER', W / 2, 220);
+    g.fillStyle = '#e8ecf5'; g.font = 'bold 26px sans-serif'; g.fillText(score + '점', W / 2, 280);
+    g.fillStyle = '#8a93a8'; g.font = '16px sans-serif';
+    g.fillText(`${level}층 · 최대 ${maxCombo}콤보 · 최고 ${best}점`, W / 2, 314);
+    g.fillStyle = '#2dd4bf'; g.font = 'bold 20px sans-serif';
+    if (Math.floor(pn / 500) % 2) g.fillText('눌러서 다시 시작', W / 2, 400);
+  }
+  g.restore();
+}
+
+let overAt = 0;
+function input() {
+  if (state === 'over') {                       // 연타하다 바로 재시작되는 것 방지
+    if (!overAt) overAt = performance.now();
+    if (performance.now() - overAt < 600) return;
+  }
+  overAt = 0;
+  press();
+  if (state === 'over') overAt = performance.now();
+}
+addEventListener('keydown', e => {
+  if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'Enter') { e.preventDefault(); if (!e.repeat) input(); }
+});
+cv.addEventListener('pointerdown', e => { e.preventDefault(); input(); });
+frame();
+</script>
+</body>
+</html>
